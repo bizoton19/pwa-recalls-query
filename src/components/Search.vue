@@ -23,7 +23,7 @@
     ></v-text-field>
     
     <v-select
-    v-if="hasResult"
+    v-show="hasResult"
      prepend-icon="business"
       :disabled="formState.cleared && !manufacturers.length>0"
       label="Manufacture"
@@ -33,7 +33,7 @@
       
     ></v-select>
     <v-select
-    v-if="hasResult"
+    v-show="hasResult"
     :disabled="formState.cleared && !productTypes.length>0"
     prepend-icon="battery_unknown"
       label="Product Type"
