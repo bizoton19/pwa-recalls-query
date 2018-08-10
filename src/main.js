@@ -10,6 +10,11 @@ Vue.use(Vuetify,{
 })
 
 Vue.config.productionTip = false
+Vue.filter('trim', function (value) {
+  if (!value) return ''
+  value = value.toString()
+  return value.trim()
+})
 
 /* eslint-disable no-new */
 new Vue({

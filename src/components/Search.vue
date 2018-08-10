@@ -8,6 +8,7 @@
         <v-form   ref="form"  >
     <v-text-field
       prepend-icon="search"
+      color="green darken-2"
       label="Search For"
       v-model="searchFor"
       clearable
@@ -16,6 +17,7 @@
     </v-text-field>
     <v-text-field
     prepend-icon="title"
+     color="purple darken-2"
       label="Product Name"
       clearable
       v-model="productName"
@@ -25,6 +27,7 @@
     <v-select
     v-show="hasResult"
      prepend-icon="business"
+    
       :disabled="formState.cleared && !manufacturers.length>0"
       label="Manufacture"
       v-model="manufacturer"
@@ -33,6 +36,7 @@
       
     ></v-select>
     <v-select
+    
     v-show="hasResult"
     :disabled="formState.cleared && !productTypes.length>0"
     prepend-icon="battery_unknown"
@@ -49,6 +53,7 @@
     ></v-text-field>
     <v-select
      prepend-icon="date_range"
+     color="orange darken-2"
       label="Date Range"
       v-model="relativeDate"
       :items="relativeDates"
@@ -56,9 +61,9 @@
       clearable
     ></v-select>
 
-    <v-btn  small round  @click="clear" color="indigo darken-1" dark   >
+    <v-btn  small round  @click.prevent="clear" color="indigo darken-1" dark   >
       Reset
-      <v-icon light right>refresh</v-icon>
+      <v-icon color="orange lighten-2" right>refresh</v-icon>
       </v-btn>
       <v-btn
       small
@@ -66,11 +71,11 @@
       color="indigo darken-1"
       class="white--text"
       :loading="showProgress && !hasResult && !isError"
-      @click.native="isFormValid()?submit():showFormValidDialog=true"
+      @click.prevent="isAtLeastOneFieldValid?submit():showFormValidDialog=true"
       :disabled="showProgress && !hasResult && !isError"
     >
       Apply
-       <v-icon light right>check_circle</v-icon>
+       <v-icon color="green lighten-2" light right>check_circle</v-icon>
       
     </v-btn>
     
@@ -137,7 +142,7 @@ export default {
       },
       
       loader: null,
-      searchFor: "",
+      searchFor: '',
       productName: "",
       manufacturer: "",
       productType: "",
@@ -181,27 +186,18 @@ export default {
       return this.resultCount > 0 ? true : false;
     },
   
-    isFormEmpty: function() {
-      console.log("product name is:" + this.productName);
-      return (
-        this.searchFor !== "" ||
-        this.productName !== "" ||
-        this.manufacturer !== "" ||
-        this.productModel !== "" ||
-        this.productType !== "" ||
-        this.relativeDate > 0
-      );
-    },
-    isFormNull: function() {
+    
+    isAtLeastOneFieldValid: function() {
       const vm = this;
+      
       return (
-        vm.searchFor !== null ||
-        vm.productName !== null ||
-        vm.manufacturer !== null ||
-        vm.productModel !== null ||
-        vm.productType !== null ||
-        vm.relativeDate !== null
-      );
+        (vm.searchFor !== undefined && vm.searchFor !=="")  ||
+        (vm.productName !== undefined && vm.productName !=="") ||
+        (vm.manufacturer !== undefined && vm.manufacturer !=="") ||
+        (vm.productModel !== undefined && vm.productModel !=="") ||
+        (vm.productType !== undefined && vm.productType!=="") ||
+        (vm.relativeDate !== undefined && vm.relativeDate !=="")
+      )
     }
   },
   watch: {
@@ -217,10 +213,7 @@ export default {
    
   },
   methods: {
-    isFormValid: function() {
-      const vm = this;
-      return vm.isFormEmpty && vm.isFormNull;
-    },
+  
 
     setDateRange(number) {
       let vm = this;
@@ -240,10 +233,9 @@ export default {
       const apiRecallURL = cpscapi + "api/Recall/GetRecall";
       const thirdwebsiteurl = window.location.href;
       const thirdwebsitetitle = document.title;
-      console.log("form is ", vm.isFormValid());
       vm.resultCount = 0;
       vm.formState.completed = false
-      let isvalid = vm.isFormValid();
+      let isvalid = vm.isAtLeastOneFieldValid;
       if (isvalid) {
         vm.isError = false;
         vm.showProgress = true;

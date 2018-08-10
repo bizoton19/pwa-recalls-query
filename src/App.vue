@@ -11,8 +11,39 @@
       
     >
 
-      <v-toolbar-title v-text="title" color="white" ></v-toolbar-title>
+      <v-toolbar-title v-text="title" color="white" >
+       
+      </v-toolbar-title>
+     
        <div class="d-flex align-center " style="margin-left: auto">
+           <v-bottom-sheet 
+           v-if="!beforeinstallpromptfired"
+           v-model="sheet" 
+           v-touch="{
+              up: () => swipe('up'),
+              down: () => swipe('down')
+            }"
+           lazy >
+       
+    <v-btn
+        slot="activator"
+        dark
+        flat
+        value="info"
+      >  
+
+        <v-icon v-if="showOnSmAndDown" color="orange lighten-2">info</v-icon>
+      </v-btn>
+        
+     <v-card raised ripple class=" flex text-xs-center">
+    
+        <v-card-title primary-title class="justify-center">
+        <footer-info>  </footer-Info>
+        </v-card-title>
+      </v-card>
+
+      
+    </v-bottom-sheet>
         <v-btn small 
          round
          color="orange darken-4"
@@ -65,13 +96,14 @@
 
 <script>
 
-import  bottomNav  from "./components/BottomNav.vue";
+import  bottomNav  from "./components/BottomNav.vue"
 import  mfooter from "./components/mFooter.vue"
-
+import footerInfo from "./components/FooterInfo.vue"
 export default {
   components:{
     mfooter,
-    bottomNav
+    bottomNav,
+    footerInfo
   },
    name: 'App',
   data () {
@@ -80,10 +112,11 @@ export default {
       duration:300,
       offset:15,
       easing: 'easeInOutCubic',
-      title: 'CPSC Recalls Query',
+      title: 'Recalls Query',
       action: true,
       beforeinstallpromptfired:false,
-      deferredPrompt:null
+      deferredPrompt:null,
+      sheet: false,
     
     }
   },
