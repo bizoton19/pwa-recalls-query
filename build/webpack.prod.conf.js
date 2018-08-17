@@ -102,7 +102,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new SWPrecacheWebpackPlugin({
       cacheId: 'cpsc-recall',
       filename: 'service-worker.js',
-      staticFileGlobs: ['dist/**/*.{js,html,css}','https://fonts.googleapis.com/css?family=Material+Icons'],
+      staticFileGlobs: ['dist/**/*.{js,html,css}'],
       minify: true,
       stripPrefix: 'dist/'
     })

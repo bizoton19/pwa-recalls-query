@@ -52,4 +52,16 @@
         });
       }
   });
+  window.addEventListener('install', function(event) {
+    event.waitUntil(
+      caches.open(cacheName).then(function(cache) {
+        return cache.addAll(
+          [
+            'https://fonts.googleapis.com/css?family=Material+Icons'
+            
+          ]
+        );
+      })
+    );
+  });
 })();
