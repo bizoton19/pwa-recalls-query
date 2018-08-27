@@ -1,9 +1,9 @@
 <template >
 
-<v-container grid-list-xl text-xs-center>
-        <v-layout justify-center align-top  wrap>
+<v-container >
+        <v-layout   wrap>
 
-      <v-flex xs12 sm12 md4 lg4 xl4>
+      <!--<v-flex xs12 sm12 md4 lg4 xl4>-->
        <div id="search">
         <v-form   ref="form"  >
     <v-text-field
@@ -73,6 +73,7 @@
       :loading="showProgress && !hasResult && !isError"
       @click.prevent="isAtLeastOneFieldValid?submit():showFormValidDialog=true"
       :disabled="showProgress && !hasResult && !isError"
+      
     >
       Apply
        <v-icon color="green lighten-2" light right>check_circle</v-icon>
@@ -88,7 +89,7 @@
       {{resultCount}} record(s) found
     </v-alert>
 
-    </v-flex>
+    <!--</v-flex>-->
    
    
    <v-flex v-if="isError">
@@ -100,8 +101,8 @@
   
     </v-flex>
     
-    <result-list v-if="hasResult" :recalls="recalls"></result-list>
-    
+   <!-- <result-list v-if="hasResult" :recalls="recalls"></result-list>
+    -->
      
 
 
@@ -124,13 +125,14 @@
 </template>
 
 <script>
-import resultList from "./ResultList.vue";
+//import resultList from "./ResultList.vue";
 import axios from "axios";
 import moment from "moment";
+import {eventBus, EventBus} from "../eventBus.js"
 export default {
   name: "search",
   components: {
-    resultList
+    //resultList
   },
   data: function() {
     return {
@@ -252,7 +254,7 @@ export default {
           .then(response => {
             if (response.data.length > 0) {
               vm.handleResponse(response);
-              
+              this.$router.push('resultList')
             } else {
               vm.showProgress = false;
               vm.formState.started = false;
@@ -308,11 +310,14 @@ export default {
 
         });
         vm.resultCount = vm.recalls.length;
-        //vm.recalls.sort();
       });
-      //vm.manufacturers.sort();
-      //vm.productTypes.sort();
+      
       vm.formState.completed = true;
+      EventBus.$emit('searchResultFetched',{
+        resultCount: vm.resultCount,
+        recalls: vm.recalls
+      })
+      
     },
     clear() {
       this.$refs.form.reset();
@@ -322,6 +327,7 @@ export default {
       this.formState.started = false;
       this.formState.completed = false;
       this.formState.cleared = true;
+      EventBus.$emit('formCleared',true)
     }
   }
 };
