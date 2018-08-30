@@ -8,7 +8,7 @@
       light
       :clipped="$vuetify.breakpoint.lgAndUp"
       app
-      width="320"
+      width="310"
     >
     <search></search>
 
@@ -82,7 +82,9 @@
     </v-toolbar>
    
     <v-content id="content">
+     
       <router-view/>
+      
     </v-content>
   
 <v-fab-transition v-if="showOnMdAndUp" >

@@ -6,26 +6,23 @@
 
         <div class="title mb-3">Check out our latest recalls</div>
 
-        <ul id="featured">
+        <ul id="featured" class="d-flex">
           <li v-for="(r,index) in latestRecalls" v-bind:key="index">
             <v-card
             flat
-            
-            
-            
             >
                <v-container 
                fluid
               grid-list-lg
                >
                <v-layout row wrap>
-              <v-flex xs12 >
+              <v-flex  >
              <v-card color="white" class="dark--text">
               <v-layout>
                 <v-flex xs12>
                   
                     <v-card-media
-             
+                    contain
                     :src="r.images[0].URL"
           class="black--text"
           height="200"

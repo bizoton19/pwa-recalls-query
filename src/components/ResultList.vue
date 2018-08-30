@@ -12,7 +12,7 @@
            <v-card active-class="warning" hover raised v-bind:key="index">
             <v-list-tile  v-bind:size="thumbSize"  ripple  v-bind:key="index" >
                  <a v-bind:href="avatarUrl(item)" target="_blank">
-                  <v-list-tile-avatar tile   >
+                  <v-list-tile-avatar tile size="55"  >
         
                  <img   v-bind:src="avatarUrl(item)" alt=""/>
                        </v-list-tile-avatar>
@@ -137,15 +137,15 @@ export default {
   },
   mounted: function(){
      this.$vuetify.goTo(this.target, this.options)
-  },
-  created: function() {
-    let vm = this
+      let vm = this
     EventBus.$on('searchResultFetched',results =>{
        vm.resultCount = results.resultCount
        vm.hasResult = true
        vm.recalls = results.recalls
     })
   },
+ 
+  
   computed:{
     target(){
       let vm = this

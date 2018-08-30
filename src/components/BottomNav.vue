@@ -14,7 +14,7 @@
         color="white"
         flat
         value="home"
-         @click="$vuetify.goTo(target, options)"
+         to="/"
         
       >
     
