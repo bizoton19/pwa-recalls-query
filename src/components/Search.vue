@@ -71,7 +71,7 @@
       color="indigo darken-1"
       class="white--text"
       :loading="showProgress && !hasResult && !isError"
-      @click.prevent="isAtLeastOneFieldValid?submit():showFormValidDialog=true"
+      @click.prevent.stop="isAtLeastOneFieldValid?submit():showFormValidDialog=true"
       :disabled="showProgress && !hasResult && !isError"
       
     >

@@ -1,48 +1,67 @@
 <template>
 
-
-  <v-container fill-height>
-    <v-layout align-center>
-      <v-flex>
+  <v-container >
+    <v-layout  >
+     <v-flex >
 
         <div class="title mb-3">Check out our latest recalls</div>
 
-        <ul>
+        <ul id="featured">
           <li v-for="(r,index) in latestRecalls" v-bind:key="index">
-            <v-card>
-              <v-container fluid grid-list-md>
-                <v-layout row wrap>
-                  <v-flex v-for="img in r.images" v-bind="{ [`xs${index===1?12:6}`]: true }" :key="img.URL">
-                    <v-card>
-                      <v-card-media  :src="img.URL" height="200px">
-                        <v-container  fluid pa-2>
-                          <v-layout fill-height>
-                            <v-flex xs12 align-end flexbox>
-                              <span class="headline white--text" v-text="r.title"></span>
-                            </v-flex>
-                          </v-layout>
-                        </v-container>
-                      </v-card-media>
+            <v-card
+            flat
+            
+            
+            
+            >
+               <v-container 
+               fluid
+              grid-list-lg
+               >
+               <v-layout row wrap>
+              <v-flex xs12 >
+             <v-card color="white" class="dark--text">
+              <v-layout>
+                <v-flex xs12>
+                  
+                    <v-card-media
+             
+                    :src="r.images[0].URL"
+          class="black--text"
+          height="200"
+          aspect-ratio="1">
+        </v-card-media>
+                </v-flex>
+                
+              </v-layout>
+              <v-divider light></v-divider>
+               <v-layout row wrap>
+              <v-card-text >
+               
 
-                      <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn icon>
-                          <v-icon>favorite</v-icon>
-                        </v-btn>
-                        <v-btn icon>
-                          <v-icon>bookmark</v-icon>
-                        </v-btn>
-                        <v-btn icon>
-                          <v-icon>share</v-icon>
-                        </v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </v-flex>
-                </v-layout>
-              </v-container>
+
+                    <div>
+                      <div>{{r.title}}</div>
+                      <div>{{r.recallDate}}</div>
+                      
+                    </div>
+                    
+                  </v-card-text>
+                  </v-layout>
+            </v-card>
+              
+          
+       
+              </v-flex>
+               </v-layout>
+               </v-container>
             </v-card>
           </li>
         </ul>
+        </v-flex>
+    </v-layout>
+    <v-divider></v-divider>
+        <hr>
         <div class="title mb-3">Check out our latest children recalls</div>
 
         <ul>
@@ -50,8 +69,7 @@
             {{r.title}}
           </li>
         </ul>
-      </v-flex>
-    </v-layout>
+      
   </v-container>
 
 
@@ -166,3 +184,31 @@
   };
 
 </script>
+<style scoped>
+ul#featured {
+    -webkit-scroll-snap-type: mandatory;
+    scroll-snap-type: x mandatory;
+    -webkit-scroll-snap-points-x: repeat(100%);
+    scroll-snap-points-x: repeat(100%);
+    white-space: nowrap;
+    list-style: none;
+    margin: 0 -20px 0 -20px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding: 0px 30px 0px 0px;
+}
+ul#featured li {
+    display: inline-block;
+    width: calc(100% - 10px);
+    padding-left: 20px;
+    margin-right: -10px;
+    -webkit-scroll-snap-align: start;
+    scroll-snap-align: start;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+</style>
