@@ -8,15 +8,16 @@
       color="blue-grey darken-4"
     >
 
-   
+   <v-icon @click.stop="drawer = !drawer"></v-icon>
      <v-btn 
         
         color="white"
         flat
         value="home"
-         @click="$vuetify.goTo(target, options)"
+         to="/"
         
       >
+    
     <v-icon>home</v-icon>
       </v-btn>
  
@@ -35,6 +36,7 @@ export default {
 
   data: function() {
     return {
+      drawer:null,
       selector: "#content",
       duration: 300,
       offset: 15,
