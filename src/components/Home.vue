@@ -1,72 +1,50 @@
 <template>
 
-  <v-container >
-    <v-layout  >
-     <v-flex >
+  <v-container>
+    <v-layout>
+      <v-flex>
 
         <div class="title mb-3">Check out our latest recalls</div>
 
         <ul id="featured" class="d-flex">
           <li v-for="(r,index) in latestRecalls" v-bind:key="index">
-            <v-card
-            flat
-            >
-               <v-container 
-               fluid
-              grid-list-lg
-               >
-               <v-layout row wrap>
-              <v-flex  >
-             <v-card color="white" class="dark--text">
-              <v-layout>
-                <v-flex xs12>
-                  
-                    <v-card-media
-                    contain
-                    :src="r.images[0].URL"
-          class="black--text"
-          height="200"
-          aspect-ratio="1">
-        </v-card-media>
-                </v-flex>
-                
-              </v-layout>
-              <v-divider light></v-divider>
-               <v-layout row wrap>
-              <v-card-text >
-               
+            <v-card flat>
+              <v-container grid-list-xs row wrap>
+                <v-layout>
+                  <v-flex>
+                    <v-card color="white" class="dark--text">
+                      <v-layout row wrap>
+                        <v-flex xs12>
 
+                          <v-card-media contain :src="r.images[0].URL" class="black--text" height="200" aspect-ratio="1">
+                          </v-card-media>
+                        </v-flex>
 
-                    <div>
-                      <div>{{r.title}}</div>
-                      <div>{{r.recallDate}}</div>
-                      
-                    </div>
-                    
-                  </v-card-text>
-                  </v-layout>
-            </v-card>
-              
-          
-       
-              </v-flex>
-               </v-layout>
-               </v-container>
+                      </v-layout>
+                      <v-divider light></v-divider>
+                      <v-card-title primary-title>
+                        <div class="headline">{{r.recallDate}}</div>
+                        <div class="text-truncate">{{r.title}}</div>
+                      </v-card-title>
+                    </v-card>
+                  </v-flex>
+                </v-layout>
+              </v-container>
             </v-card>
           </li>
         </ul>
-        </v-flex>
+      </v-flex>
     </v-layout>
     <v-divider></v-divider>
-        <hr>
-        <div class="title mb-3">Check out our latest children recalls</div>
+    <hr>
+    <div class="title mb-3">Check out our latest children recalls</div>
 
-        <ul>
-          <li v-for="(r,index) in childrenRecalls" v-bind:key="index">
-            {{r.title}}
-          </li>
-        </ul>
-      
+    <ul>
+      <li v-for="(r,index) in childrenRecalls" v-bind:key="index">
+        {{r.title}}
+      </li>
+    </ul>
+
   </v-container>
 
 
@@ -179,10 +157,9 @@
       }
     }
   };
-
 </script>
 <style scoped>
-ul#featured {
+  ul#featured {
     -webkit-scroll-snap-type: mandatory;
     scroll-snap-type: x mandatory;
     -webkit-scroll-snap-points-x: repeat(100%);
@@ -194,18 +171,19 @@ ul#featured {
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     padding: 0px 30px 0px 0px;
-}
-ul#featured li {
+  }
+
+  ul#featured li {
     display: inline-block;
     width: calc(100% - 10px);
     padding-left: 20px;
     margin-right: -10px;
     -webkit-scroll-snap-align: start;
     scroll-snap-align: start;
-}
-li {
+  }
+
+  li {
     display: list-item;
     text-align: -webkit-match-parent;
-}
-
+  }
 </style>
