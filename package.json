@@ -14,7 +14,7 @@
     "iisnode-env": "^1.0.3",
     "moment": "^2.20.1",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1",
+    "vue-router": "^3.6.5",
     "vuetify": "^1.0.0"
   },
   "devDependencies": {
